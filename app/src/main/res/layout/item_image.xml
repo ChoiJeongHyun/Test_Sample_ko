@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="kr.co.example.codingtest_kakaocme.views.MainViewModel" />
+        <variable
+            name="item"
+            type="kr.co.example.codingtest_kakaocme.vo.Document" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/item_view_img"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            bind:imageUrl="@{item.thumbnailUrl}"
+            />
+
+        <TextView
+            android:id="@+id/item_view_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{`Date :` + item.dateTime}"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_toRightOf="@id/item_view_img"/>
+
+        <TextView
+            android:id="@+id/item_view_site_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_view_img"
+            android:text="@{`siteName : ` + item.displaySiteName}"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_below="@id/item_view_date"/>
+
+        <TextView
+            android:id="@+id/item_view_collection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_view_img"
+            android:text="@{`collection : ` + item.collection}"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_below="@id/item_view_site_name"/>
+
+    </RelativeLayout>
+
+</layout>

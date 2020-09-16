@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.example.codingtest_kakaocme.views.MainViewModel" />
+
+        <variable
+            name="color"
+            type="android.graphics.Color" />
+
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        tools:context=".views.MainActivity">
+
+        <TextView
+            android:id="@+id/view_activity_main_title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="검색조건 설정"
+            android:textColor="#000"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/view_activity_main_title2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_activity_main_title1"
+            android:paddingStart="10dp"
+            android:text="정렬방식"
+            android:textColor="#99000000"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/view_activity_main_group1"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@id/view_activity_main_title2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/view_activity_main_accracy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{()->vm.typeClick(`정확도순`)}"
+                android:text="정확도순"
+                android:textColor="#000"
+                android:textSize="18sp"
+                bind:isClickBackgroundColor="@{vm.sortType}" />
+
+
+            <TextView
+                android:id="@+id/view_activity_main_latest"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{()->vm.typeClick(`최신순`)}"
+                android:text="최신순"
+                android:textColor="#000"
+                android:textSize="18sp"
+                bind:isClickBackgroundColor="@{vm.sortType}" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/view_activity_main_title3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_activity_main_group1"
+            android:paddingStart="10dp"
+            android:text="검색결과"
+            android:textColor="#99000000"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/view_activity_main_group2"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@id/view_activity_main_title3"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/view_activity_main_all"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{()->vm.typeClick(`전체`)}"
+                android:text="전체"
+                android:textColor="#000"
+                android:textSize="18sp"
+                bind:isClickBackgroundColor="@{vm.searchType}" />
+
+
+            <TextView
+                android:id="@+id/view_activity_main_search_blog_and_cafe"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{()->vm.typeClick(`블로그/카페`)}"
+                android:text="블로그/카페"
+                android:textColor="#000"
+                android:textSize="18sp"
+                bind:isClickBackgroundColor="@{vm.searchType}" />
+
+
+            <TextView
+                android:id="@+id/view_activity_main_search_news"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{()->vm.typeClick(`뉴스`)}"
+                android:text="뉴스"
+                android:textColor="#000"
+                android:textSize="18sp"
+                bind:isClickBackgroundColor="@{vm.searchType}" />
+
+
+            <TextView
+                android:id="@+id/view_activity_main_search_etc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{()->vm.typeClick(`기타`)}"
+                android:text="기타"
+                android:textColor="#000"
+                android:textSize="18sp"
+                bind:isClickBackgroundColor="@{vm.searchType}" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/view_activity_main_search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_activity_main_group2"
+            android:layout_alignParentRight="true"
+            android:onClick="@{()->vm.search(vm.searchInput)}"
+            android:layout_marginLeft="40dp"
+            android:text="검색하기" />
+
+        <EditText
+            android:id="@+id/view_activity_main_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_activity_main_group2"
+            android:layout_toLeftOf="@id/view_activity_main_search_btn"
+            android:gravity="right"
+            android:hint="검색어를 입력해주세요."
+            android:text="@={vm.searchInput}"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            bind:viewModel="@{vm}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/view_activity_main_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/view_activity_main_et"
+            bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
+
+    </RelativeLayout>
+</layout>
